@@ -1,0 +1,65 @@
+# Manifest to deploy NFS-server docker image in Kubernetes
+
+# Please note that some Kubernetes platforms (minikube, aws) 
+# have issue with NFS volume plugin to resolve NFS server DNS 
+# name as it seems to rely on host's DNS and not Kubernetes' DNS
+# https://github.com/kubernetes/minikube/issues/2218
+# https://github.com/kubernetes/minikube/issues/3417
+
+# For "Deploying Stateful Applications in Kubernetes" course @ Pluralsight, 
+# I recommend using the docker environment as documented in the README.md
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: nfs-server
+  labels:
+    app: nfs-server
+spec:
+  type: ClusterIP  
+  selector:
+    app: nfs-server
+  ports:
+    - name: tcp-2049
+      port: 2049
+      protocol: TCP
+    - name: udp-111
+      port: 111
+      protocol: UDP
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: nfs-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nfs-server
+  template:
+    metadata:
+      name: nfs-server
+      labels:
+        app: nfs-server
+    spec:
+      containers:
+        - name: nfs-server
+          image: phico/nfs-server:latest
+          volumeMounts:
+            - mountPath: /var/nfs
+              name: nfs-vol
+          securityContext:
+            privileged: true
+          ports:
+            - name: tcp-2049
+              containerPort: 2049
+              protocol: TCP
+            - name: udp-111
+              containerPort: 111
+              protocol: UDP
+      volumes:
+        - name: nfs-vol
+          hostPath:
+            path: /var/nfs
+            type: DirectoryOrCreate
