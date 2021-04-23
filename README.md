@@ -32,9 +32,9 @@ docker network connect minikube nfs-server
 ```
 4. [Optional] Install NFS dynamic provisioner from [nfs-subdir-external-provisioner/deploy](nfs-subdir-external-provisioner/deploy) directory : 
 ```
-kubectl create -f rbac.yaml
-kubectl create -f deployment.yaml
-kubectl create -f storageClass.yaml
+kubectl apply -f rbac.yaml
+kubectl apply -f deployment.yaml
+kubectl apply -f storageClass.yaml
 ``` 
 
 Credit to project : [https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner](https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner).  
@@ -42,10 +42,10 @@ Credit to project : [https://github.com/kubernetes-sigs/nfs-subdir-external-prov
 5. [Optional] Install NFS CSI Driver from [csi-driver-nfs/deploy](csi-driver-nfs/deploy)  directory :
 
 ```
-kubectl create -f rbac-csi-nfs-controller.yaml
-kubectl create -f csi-nfs-driverinfo.yaml
-kubectl create -f csi-nfs-controller.yaml
-kubectl create -f csi-nfs-node.yaml
+kubectl apply -f rbac-csi-nfs-controller.yaml
+kubectl apply -f csi-nfs-driverinfo.yaml
+kubectl apply -f csi-nfs-controller.yaml
+kubectl apply -f csi-nfs-node.yaml
 ```
 Credit to project : [https://github.com/kubernetes-csi/csi-driver-nfs](https://github.com/kubernetes-csi/csi-driver-nfs). 
 
@@ -62,7 +62,7 @@ Please check the [examples](examples) folder for following usages :
 
 Sample usage :
 ```
-kubectl create -f busybox-nfs-pvc-pv.yaml
+kubectl apply -f busybox-nfs-pvc-pv.yaml
 kubectl delete -f busybox-nfs-pvc-pv.yaml
 ```
 

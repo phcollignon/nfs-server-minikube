@@ -10,7 +10,3 @@
 #
 /var/nfs  *(rw,sync,fsid=0,crossmnt,no_subtree_check,no_root_squash,insecure_locks,insecure) 
 /var/nfs/exports  *(rw,sync,fsid=1001,no_subtree_check,no_root_squash,insecure_locks,insecure)
-
-#/var/nfs  *(rw,sync,fsid=0,crossmnt,insecure,sync,no_subtree_check,no_root_squash,no_auth_nlm,sync,no_subtree_check) 
-#/var/nfs/exports  *(rw,insecure,sync,no_subtree_check,no_root_squash,no_auth_nlm,sync,no_subtree_check)
-
