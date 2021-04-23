@@ -47,7 +47,9 @@ metadata:
 provisioner: nfs.csi.k8s.io
 parameters:
   server: nfs-server
-  share: /var/nfs
+  share: /exports
 reclaimPolicy: Retain
 volumeBindingMode: Immediate
-
+mountOptions:
+  - hard
+  - nfsvers=4.1

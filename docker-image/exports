@@ -8,7 +8,9 @@
 # /srv/nfs4        gss/krb5i(rw,sync,fsid=0,crossmnt,no_subtree_check)
 # /srv/nfs4/homes  gss/krb5i(rw,sync,no_subtree_check)
 #
-# /var/nfs  *(rw,fsid=0,insecure,no_root_squash,no_auth_nlm,sync,no_subtree_check) # fsid=0 for v4 root export (/)
-/var/nfs *(rw,insecure,no_root_squash,no_auth_nlm,sync,no_subtree_check)
+/var/nfs  *(rw,sync,fsid=0,crossmnt,no_subtree_check,no_root_squash,insecure_locks,insecure) 
+/var/nfs/exports  *(rw,sync,fsid=1001,no_subtree_check,no_root_squash,insecure_locks,insecure)
 
+#/var/nfs  *(rw,sync,fsid=0,crossmnt,insecure,sync,no_subtree_check,no_root_squash,no_auth_nlm,sync,no_subtree_check) 
+#/var/nfs/exports  *(rw,insecure,sync,no_subtree_check,no_root_squash,no_auth_nlm,sync,no_subtree_check)
 

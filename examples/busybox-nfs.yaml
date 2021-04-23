@@ -27,4 +27,4 @@ spec:
       - name: nfs
         nfs:
           server: nfs-server
-          path: "/var/nfs"
+          path: /exports

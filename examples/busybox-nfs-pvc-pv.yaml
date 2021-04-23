@@ -22,7 +22,6 @@ spec:
         volumeMounts:
           - name: nfs
             mountPath: "/mnt"
-            subPath: "pvc-pv"
       volumes:
       - name: nfs
         persistentVolumeClaim:
@@ -51,4 +50,4 @@ spec:
     - ReadWriteMany
   nfs:
     server: nfs-server
-    path: "/var/nfs"
+    path: /exports

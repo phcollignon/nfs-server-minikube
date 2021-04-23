@@ -1,7 +1,8 @@
 FROM debian:stretch-slim
 
 RUN apt-get update
-RUN apt-get install -y nfs-kernel-server
+RUN apt-get install -y nfs-kernel-server portmap
+#RUN apt-get install -y systemd portmap nfs-common
 
 COPY exports /etc/exports
 

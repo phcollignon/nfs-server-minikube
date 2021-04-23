@@ -31,9 +31,9 @@ spec:
             - name: NFS_SERVER
               value: nfs-server
             - name: NFS_PATH
-              value: /var/nfs
+              value: /exports
       volumes:
         - name: nfs-client-root
           nfs:
             server: nfs-server
-            path: /var/nfs
+            path: /exports

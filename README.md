@@ -34,7 +34,7 @@ docker network connect minikube nfs-server
 ```
 kubectl create -f rbac.yaml
 kubectl create -f deployment.yaml
-kybectl create -f storageClass.yaml
+kubectl create -f storageClass.yaml
 ``` 
 
 Credit to project : [https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner](https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner).  
