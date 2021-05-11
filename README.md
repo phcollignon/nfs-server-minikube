@@ -16,7 +16,8 @@ The environment consists in :
 ![](env.png)
 
 ## How to deploy
-1. Download and run [minikube](https://minikube.sigs.k8s.io/docs/) with docker driver (install [Docker](https://docs.docker.com/) first if it is not already available on your platform)
+1. First, install [Docker](https://docs.docker.com/) (version 18.09.1 or higher) if it is not already available on your platform
+2. Download and run [minikube](https://minikube.sigs.k8s.io/docs/) with docker driver 
 ```
 minikube start
 ```
@@ -30,7 +31,8 @@ docker run -d --rm --privileged --name nfs-server  -v /var/nfs:/var/nfs  phico/n
 ``` 
 docker network connect minikube nfs-server 
 ```
-4. [Optional] Install NFS dynamic provisioner from [nfs-subdir-external-provisioner/deploy](nfs-subdir-external-provisioner/deploy) directory : 
+4. Install Kubectl [https://kubernetes.io/docs/tasks/tools/](https://kubernetes.io/docs/tasks/tools/)
+5. [Optional] Install NFS dynamic provisioner from [nfs-subdir-external-provisioner/deploy](nfs-subdir-external-provisioner/deploy) directory : 
 ```
 kubectl apply -f rbac.yaml
 kubectl apply -f deployment.yaml
@@ -39,7 +41,7 @@ kubectl apply -f storageClass.yaml
 
 Credit to project : [https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner](https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner).  
 
-5. [Optional] Install NFS CSI Driver from [csi-driver-nfs/deploy](csi-driver-nfs/deploy)  directory :
+6. [Optional] Install NFS CSI Driver from [csi-driver-nfs/deploy](csi-driver-nfs/deploy)  directory :
 
 ```
 kubectl apply -f rbac-csi-nfs-controller.yaml
@@ -65,7 +67,47 @@ Sample usage :
 kubectl apply -f busybox-nfs-pvc-pv.yaml
 kubectl delete -f busybox-nfs-pvc-pv.yaml
 ```
+Then list the `/var/nfs/exports` folder content to view the nfs server storage content.
 
+i.e. :
+```
+cat /var/nfs/exports/log.txt
+```
+should show the `busybox-nfs` example output
+
+
+## Additional configuration for the "Deploying Statefull Application to Kubernetes" course @PluralSight.
+
+Add ingress support so that the users can access the demo application.
+
+Finally, we’ll add the ingress support to minikube to access the demo. 
+``` 
+minikube addons enable ingress
+``` 
+(WARNING : minikube 19.0 ingress support is bugged [https://github.com/kubernetes/minikube/issues/11121](https://github.com/kubernetes/minikube/issues/11121))
+
+And we configure the name resolution so that the user can access the application with a domain name
+ by first getting the node’s IP with :
+ ```
+ minikube ip
+ ```
+and then, resolving the two domain names to that IP in the host’s file one for the frontend and one for the backend API.
+/etc/hosts
+```
+127.0.0.1	localhost
+127.0.1.1	cursus
+192.168.49.2 guestbook.frontend.minikube.local
+192.168.49.2 guestbook.backend.minikube.local
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+```
+
+Alternatively you can use the `minikube ingress-dns` addon and resolve only the minikube ip in the hosts file.
 
 
 ## How to build 
