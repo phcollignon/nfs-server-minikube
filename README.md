@@ -4,10 +4,10 @@ Here is a minimalist NFS server for testing NFS Storage with Kubernetes (minikub
 
 Please note that this is only for testing, development and educational purposes.  
 
-It has been developped for the course "Deploying Statefull Application to Kubernetes" @PluralSight.
+It has been developped for the course "Deploying Statefull Application to Kubernetes" @PluralSight (to be published soon).
 
 ## Environment
-The environment consists in : 
+The environment consists of : 
 - minikube running in Docker
 - NFS server running in Docker in the minikube network
 - Dynamic NFS Storage Provisioner (from [nfs-subdir-external-provisioner/deploy](nfs-subdir-external-provisioner/deploy))
@@ -76,7 +76,7 @@ cat /var/nfs/exports/log.txt
 should show the `busybox-nfs` example output
 
 
-## Additional configuration for the "Deploying Statefull Application to Kubernetes" course @PluralSight.
+## Additional configuration for the "Deploying Statefull Application to Kubernetes" course @PluralSight (to be published soon).
 
 Add ingress support so that the users can access the demo application.
 
