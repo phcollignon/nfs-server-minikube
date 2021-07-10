@@ -4,7 +4,7 @@ Here is a minimalist NFS server for testing NFS Storage with Kubernetes (minikub
 
 Please note that this is only for testing, development and educational purposes.  
 
-It has been developped for the course "Deploying Statefull Application to Kubernetes" @PluralSight (to be published soon).
+It has been developed for the course "Deploying Statefull Application to Kubernetes" @PluralSight (to be published soon).
 
 ## Environment
 The environment consists of : 
@@ -27,7 +27,7 @@ docker run -d --rm --privileged --name nfs-server  -v /var/nfs:/var/nfs  phico/n
  ``` 
  By default, the NFS share is mounted with a volume in a `/var/nfs` directory on your host.
 
- 3. Add the `nfs-server` container to minikube docker network :
+ 3. Add the `nfs-server` container to the minikube docker network :
 ``` 
 docker network connect minikube nfs-server 
 ```

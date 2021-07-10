@@ -19,9 +19,11 @@ spec:
       dnsPolicy: ClusterFirstWithHostNet
       nodeSelector:
         kubernetes.io/os: linux
+      tolerations:
+        - operator: "Exists"
       containers:
         - name: liveness-probe
-          image: k8s.gcr.io/sig-storage/livenessprobe:v2.1.0
+          image: k8s.gcr.io/sig-storage/livenessprobe:v2.3.0
           args:
             - --csi-address=/csi/csi.sock
             - --probe-timeout=3s
@@ -38,7 +40,7 @@ spec:
               cpu: 10m
               memory: 20Mi
         - name: node-driver-registrar
-          image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.1.0
+          image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.2.0
           lifecycle:
             preStop:
               exec:
