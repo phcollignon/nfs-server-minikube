@@ -16,12 +16,21 @@ The environment consists of :
 ![](env.png)
 
 ## How to deploy
-1. First, install [Docker](https://docs.docker.com/) (version 18.09.1 or higher) if it is not already available on your platform
-2. Download and run [minikube](https://minikube.sigs.k8s.io/docs/) with docker driver 
+0. First, install [Docker](https://docs.docker.com/) (version 18.09.1 or higher) if it is not already available on your platform
+1. Download and run [minikube](https://minikube.sigs.k8s.io/docs/) with docker driver 
 ```
 minikube start
 ```
 2. Run NFS server in Docker :
+
+First make sure that NFS is supported by the kernel of your host machine (nfs & nfsd modules)
+
+(i.e. on Ubuntu :)
+```
+sudo apt-get install nfs-common
+sudo apt-get install nfs-server
+```
+Then launch the nfs-server container :
 ```
 docker run -d --rm --privileged --name nfs-server  -v /var/nfs:/var/nfs  phico/nfs-server:latest
  ``` 
