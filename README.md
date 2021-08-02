@@ -33,7 +33,7 @@ Either by loading nfs modules :
 # modprobe nfsd
 ```
  or installing nfs packages 
-(i.e. on Ubuntu :)
+(i.e. on Debian :)
 ```
 sudo apt-get install nfs-server
 sudo apt-get install nfs-common
