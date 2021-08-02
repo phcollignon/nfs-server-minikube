@@ -16,6 +16,8 @@ The environment consists of :
 ![](env.png)
 
 ## How to deploy
+Please note that this environment has been tested only on Linux.  If you are running macOS or Windows it is recommended to use a Linux VM.
+
 0. First, install [Docker](https://docs.docker.com/) (version 18.09.1 or higher) if it is not already available on your platform
 1. Download and run [minikube](https://minikube.sigs.k8s.io/docs/) with docker driver 
 ```
@@ -25,10 +27,16 @@ minikube start
 
 First make sure that NFS is supported by the kernel of your host machine (nfs & nfsd modules)
 
+Either by loading nfs modules :
+```
+# modprobe nfs
+# modprobe nfsd
+```
+ or installing nfs packages 
 (i.e. on Ubuntu :)
 ```
-sudo apt-get install nfs-common
 sudo apt-get install nfs-server
+sudo apt-get install nfs-common
 ```
 Then launch the nfs-server container :
 ```
