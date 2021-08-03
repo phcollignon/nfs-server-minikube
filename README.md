@@ -25,24 +25,17 @@ minikube start
 ```
 2. Run NFS server in Docker :
 
-First make sure that NFS is supported by the kernel of your host machine (nfs & nfsd modules)
-
-Either by loading nfs modules :
+First make sure that NFS is supported by the kernel of your host machine (nfs & nfsd modules).  
+As root :
 ```
 # modprobe nfs
 # modprobe nfsd
-```
- or installing nfs packages 
-(i.e. on Debian :)
-```
-sudo apt-get install nfs-server
-sudo apt-get install nfs-common
 ```
 Then launch the nfs-server container :
 ```
 docker run -d --rm --privileged --name nfs-server  -v /var/nfs:/var/nfs  phico/nfs-server:latest
  ``` 
- By default, the NFS share is mounted with a volume in a `/var/nfs` directory on your host.
+ By default, the NFS share is mounted with a volume in a `/var/nfs` directory on your host.  If you host does not allow this
 
  3. Add the `nfs-server` container to the minikube docker network :
 ``` 
